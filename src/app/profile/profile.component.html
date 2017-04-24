@@ -1,0 +1,29 @@
+<div *ngIf="currentUser">
+    <div class="panel panel-default">
+        <div class="panel-heading">{{currentUser.name}}</div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <img class="img-thumbnail" [src]="currentUser.avatar_url" />
+                    <a class="btn btn-default btn-block" href="{{currentUser.html_url}}" target="_blank">View profile</a>
+                </div>
+                <div class="col-md-8">
+                    <div class="stats">
+                        <span class="label label-default">{{currentUser.public_repos}} Pub repos</span>
+                        <span class="label label-primary">{{currentUser.public_gists}} Pub gists</span>
+                        <span class="label label-success">{{currentUser.followers}} Followers</span>
+                        <span class="label label-info">{{currentUser.following}} Following</span>
+                    </div>
+                    <br />
+                    <ul class="list-group">
+                        <li class="list-group-item"><strong>Username:</strong> {{currentUser.login}}</li>
+                        <li class="list-group-item"><strong>Location:</strong> {{currentUser.location}}</li>
+                        <li class="list-group-item"><strong>Email:</strong> {{currentUser.email}}</li>
+                        <li class="list-group-item"><strong>Blog:</strong> {{currentUser.blog}}</li>
+                        <li class="list-group-item"><strong>Member since:</strong> {{currentUser.created_at}}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
