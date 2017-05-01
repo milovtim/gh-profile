@@ -1,22 +1,31 @@
-import {Injectable} from '@angular/core';
-import {Http, Headers} from '@angular/http';
-import 'rxjs/add/operator/map';
+import {Injectable, Inject} from "@angular/core";
+import {Http, RequestOptionsArgs, ResponseContentType} from "@angular/http";
+import "rxjs/add/operator/map";
+import {CONFIG} from "../config";
 
 @Injectable()
 export class GithubService {
-    private username: string;
-    private clientId: string = '';
-    private clientSecret: string = '';
 
+    private options: RequestOptionsArgs;
 
-    constructor(private _http: Http) {
-        console.log('GH service created');
-        this.username = '';
+    constructor(private _http: Http, @Inject(CONFIG) private config) {
+        this.options = {
+            params: {
+                client_id: config.clientId,
+                client_secret: config.clientSecret
+            },
+            responseType: ResponseContentType.Json
+        };
+
     }
 
-    getUser() {
-        return this._http.get('http://api.github.com/users/' + this.username +
-            '?client_id=' + this.clientId + '&client_secret=' + this.clientSecret)
-            .map(res => res.json());
+    getUser(username: string) {
+        return this._http
+            .get(`http://api.github.com/users/${username}`, this.options).map(res => res.json());
+    }
+
+    getRepos(username: string) {
+        return this._http
+            .get(`http://api.github.com/users/${username}/repos`, this.options).map(res => res.json());
     }
 }

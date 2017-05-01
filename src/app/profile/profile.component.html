@@ -1,3 +1,18 @@
+<div class="row">
+    <div class="col-md-12">
+        <form>
+            <div class="form-group">
+                <!--[(ngModel)]="inputUsername" name="inputUsername"-->
+                <input type="text" class="form-control"
+                       #uname
+                       placeholder="Type Github username"
+                       (keyup)="searchUser(uname.value)"
+                />
+            </div>
+        </form>
+    </div>
+</div>
+
 <div *ngIf="currentUser">
     <div class="panel panel-default">
         <div class="panel-heading">{{currentUser.name}}</div>
@@ -22,6 +37,27 @@
                         <li class="list-group-item"><strong>Blog:</strong> {{currentUser.blog}}</li>
                         <li class="list-group-item"><strong>Member since:</strong> {{currentUser.created_at}}</li>
                     </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">User repos</h3>
+        </div>
+        <div class="panel-body">
+            <div *ngFor="let r of repos">
+                <div class="row">
+                    <div class="col-md-9">
+                        <h4><a href="{{r.html_ref}}" target="_blank">{{r.name}}</a></h4>
+                        <p>{{r.description}}</p>
+                    </div>
+                    <div class="col-md-3">
+                        <span class="label label-default">{{r.watchers}} Watchers</span>
+                        <span class="label label-primary">{{r.forks}} Forks</span>
+                    </div>
                 </div>
             </div>
         </div>
